@@ -12,8 +12,8 @@ int main()
 
     while (true)
     {
-        //if (personalBudget.isUserLoggedIn() == false)
-        if (true)
+        if (budgetMainApp.isUserLoggedIn() == false)
+            //if (true)
         {
             Menus::showHomeMenu();
             choice = Utils::getCharacter();
@@ -24,8 +24,7 @@ int main()
                 budgetMainApp.registerUser();
                 break;
             case '2':
-                //ksiazkaAdresowa.logowanieUzytkownika();
-                ;
+                budgetMainApp.loginUser();
                 break;
             case '3':
                 budgetMainApp.showAllUsers();
@@ -39,42 +38,38 @@ int main()
                 break;
             }
         }
-    }
-}
-        /*else
+        else
         {
-            wybor = wybierzOpcjeZMenuUzytkownika();
+            Menus::showMainMenu();
+            choice = Utils::getCharacter();
 
-            switch (wybor)
+            switch (choice)
             {
             case '1':
-                ksiazkaAdresowa.dodajAdresata();
+                ;
                 break;
             case '2':
-                ksiazkaAdresowa.wyszukajAdresatowPoImieniu();
+                ;
                 break;
             case '3':
-                ksiazkaAdresowa.wyszukajAdresatowPoNazwisku();
+                ;
                 break;
             case '4':
-                ksiazkaAdresowa.wyswietlWszystkichAdresatow();
+                ;
                 break;
             case '5':
-                ksiazkaAdresowa.usunAdresata();
+                ;
                 break;
             case '6':
-                ksiazkaAdresowa.edytujAdresata();
+                ;
                 break;
             case '7':
-                ksiazkaAdresowa.zmianaHaslaZalogowanegoUzytkownika();
-                break;
-            case '8':
-                ksiazkaAdresowa.wylogujUzytkownika();
+                budgetMainApp.logoutUser();
                 break;
             }
         }
     }
 
     return 0;
-}*/
+}
 

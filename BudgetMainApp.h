@@ -22,6 +22,9 @@ public:
     }
 
     void registerUser();
+    void loginUser();
+    void logoutUser();
+    bool isUserLoggedIn();
     void showAllUsers();
 };
 

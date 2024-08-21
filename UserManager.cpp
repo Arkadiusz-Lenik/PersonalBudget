@@ -79,5 +79,57 @@ void UserManager::showAllUsers()
     system("pause");
 }
 
+void UserManager::loginUser()
+{
+    string login = "", password = "";
+    bool userExists = false;
+
+    cout << endl << "Enter login: ";
+    login = Utils::readLine();
+
+    for (size_t i = 0; i < users.size(); i++)
+    {
+        if (users[i].login == login)
+        {
+            userExists = true;
+
+            for (int attemptsLeft = 3; attemptsLeft > 0; attemptsLeft--)
+            {
+                cout << "Enter password. Attempts left: " << attemptsLeft << ": ";
+                password = Utils::readLine();
+
+                if (users[i].password == password)
+                {
+                    cout << endl << "You are logged in." << endl << endl;
+                    loggedUserId = users[i].userId;
+                    system("pause");
+                    return;
+                }
+            }
+
+            cout << endl << "You have entered wrong password three times." << endl;
+            system("pause");
+            return;
+        }
+    }
+
+    if (userExists == false)
+    {
+        cout << "Entered user do not exist" << endl << endl;
+        system("pause");
+        return;
+    }
+}
+
+bool UserManager::isUserLoggedIn()
+{
+    return (loggedUserId > 0) ? true : false;
+}
+
+void UserManager::setLoggedUserId(int loggedUserId)
+{
+    this->loggedUserId = loggedUserId;
+}
+
 
 
