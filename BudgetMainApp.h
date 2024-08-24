@@ -11,10 +11,11 @@ class BudgetMainApp
 {
     UserManager userManager;
     BudgetManager *budgetManager;
+    const string INCOME_FILE_NAME;
+    const string EXPENSE_FILE_NAME;
 
 public:
-    BudgetMainApp(string userFileName)
-    : userManager (userFileName)
+    BudgetMainApp(string userFileName, string incomeFileName, string expenseFileName) : userManager(userFileName), INCOME_FILE_NAME(incomeFileName), EXPENSE_FILE_NAME(expenseFileName)
     {
         budgetManager = NULL;
     }

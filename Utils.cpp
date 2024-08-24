@@ -27,3 +27,20 @@ string Utils::readLine()
     getline(cin, input);
     return input;
 }
+
+double Utils::getDecimalNumber()
+{
+    string input = "";
+    double number = 0;
+
+    while (true)
+    {
+        getline(cin, input);
+        stringstream myStream(input);
+
+        if (myStream >> number)
+            break;
+        cout << "Entered character string is not a number. Try again." << endl;
+    }
+    return number;
+}

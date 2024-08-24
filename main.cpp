@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    BudgetMainApp budgetMainApp("Users.xml");
+    BudgetMainApp budgetMainApp("users.xml", "incomes.xml", "expenses.xml");
     char choice;
 
     while (true)

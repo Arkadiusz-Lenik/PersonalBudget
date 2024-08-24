@@ -13,6 +13,7 @@ class File
 protected:
     File(string fileName) : FILE_NAME(fileName) {};
     CMarkup xmlDoc;
+    string getFileName();
 };
 
 #endif

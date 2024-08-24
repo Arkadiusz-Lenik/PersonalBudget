@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -11,6 +12,7 @@ class Utils
 public:
     static char getCharacter();
     static string readLine();
+    static double getDecimalNumber();
 };
 
 #endif

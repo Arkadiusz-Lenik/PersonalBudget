@@ -21,8 +21,7 @@ User UserManager::enterUserData()
     user.userId = getNewUserId();
     string login = "";
     cout << "Enter login: ";
-    //login = Utils::readLine();
-    login = readLine();
+    login = Utils::readLine();
 
     vector <User>::iterator itr = users.begin();
 
@@ -31,7 +30,7 @@ User UserManager::enterUserData()
         if (itr->login == login)
         {
             cout << "Entered login is already taken. Try again" << endl;
-            login = readLine();
+            login = Utils::readLine();
             itr = users.begin();
         }
         else
@@ -42,14 +41,11 @@ User UserManager::enterUserData()
 
     user.login = login;
     cout << "Enter password: ";
-    //user.password = Utils::readLine();
-    user.password = readLine();
+    user.password = Utils::readLine();
     cout << "Enter name: ";
-    //user.firstName = Utils::readLine();
-    user.firstName = readLine();
+    user.firstName = Utils::readLine();
     cout << "Enter lastname: ";
-    //user.lastName = Utils::readLine();
-    user.lastName = readLine();
+    user.lastName = Utils::readLine();
 
     return user;
 }
@@ -60,13 +56,6 @@ int UserManager::getNewUserId()
         return 1;
     else
         return users.back().userId + 1;
-}
-
-string UserManager::readLine()
-{
-    string input = "";
-    getline(cin, input);
-    return input;
 }
 
 void UserManager::showAllUsers()
