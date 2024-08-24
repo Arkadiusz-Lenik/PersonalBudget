@@ -131,5 +131,9 @@ void UserManager::setLoggedUserId(int loggedUserId)
     this->loggedUserId = loggedUserId;
 }
 
+int UserManager::getLoggedUserId()
+{
+    return loggedUserId;
+}
 
 

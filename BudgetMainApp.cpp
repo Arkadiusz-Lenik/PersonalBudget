@@ -8,6 +8,11 @@ void BudgetMainApp::registerUser()
 void BudgetMainApp::loginUser()
 {
     userManager.loginUser();
+
+    if (userManager.isUserLoggedIn())
+    {
+        budgetManager = new BudgetManager(userManager.getLoggedUserId());
+    }
 }
 
 bool BudgetMainApp::isUserLoggedIn()
@@ -18,6 +23,8 @@ bool BudgetMainApp::isUserLoggedIn()
 void BudgetMainApp::logoutUser()
 {
     userManager.setLoggedUserId(0);
+    delete budgetManager;
+    budgetManager = NULL;
 }
 
 void BudgetMainApp::showAllUsers()
