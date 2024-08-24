@@ -49,7 +49,7 @@ int main()
                 budgetMainApp.addIncome();
                 break;
             case '2':
-                ;
+                budgetMainApp.addExpense();;
                 break;
             case '3':
                 ;

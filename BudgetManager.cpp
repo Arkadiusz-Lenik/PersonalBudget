@@ -45,5 +45,19 @@ void BudgetManager::addIncome()
     system("pause");
 }
 
+void BudgetManager::addExpense()
+{
+    Operation operation;
+    operation = addOperationDetails(EXPENSE);
+    expenses.push_back(operation);
+
+    if (expenseFile.addOperationToFile(operation))
+    {
+        cout << "Your expense has been added to file." << endl << endl;
+    }
+
+    system("pause");
+}
+
 
 

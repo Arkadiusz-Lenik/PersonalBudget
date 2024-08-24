@@ -30,6 +30,7 @@ public:
     void logoutUser();
     bool isUserLoggedIn();
     void addIncome();
+    void addExpense();
     void showAllUsers();
 };
 
