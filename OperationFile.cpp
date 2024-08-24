@@ -8,7 +8,7 @@ int OperationFile::getLastOperationId()
     xmlDoc.FindElem();
     xmlDoc.IntoElem();
 
-    while ( xmlDoc.FindElem("Income") )
+    while ( xmlDoc.FindElem("Operation") )
     {
         xmlDoc.IntoElem();
         xmlDoc.FindElem( "OperationId" );
@@ -23,15 +23,14 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
 {
     vector <Operation> operations;
     Operation operation;
-    xmlDoc.Load(getFileName());
-    xmlDoc.FindElem();
-    xmlDoc.IntoElem();
+    bool fileExists = xmlDoc.Load(getFileName());
 
-    while (xmlDoc.FindElem("Income"))
+    if (fileExists)
     {
-        xmlDoc.FindElem( "UserId" );
+        xmlDoc.FindElem();
+        xmlDoc.IntoElem();
 
-        if (stoi(xmlDoc.GetChildData()) == loggedUserId)
+        while (xmlDoc.FindElem("Operation"))
         {
             xmlDoc.IntoElem();
             xmlDoc.FindElem( "OperationId" );
@@ -44,10 +43,42 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
             operation.item = xmlDoc.GetData();
             xmlDoc.FindElem( "Amount" );
             operation.amount = stod(xmlDoc.GetData());
+
+            if (operation.userId == loggedUserId)
+            {
+                operations.push_back(operation);
+            }
+
+            xmlDoc.OutOfElem();
         }
-        operations.push_back(operation);
-        xmlDoc.OutOfElem();
+
+        return operations;
+    }
+    else
+    {
+        return operations;
+    }
+}
+
+bool OperationFile::addOperationToFile(const Operation &operation)
+{
+    bool fileExists = xmlDoc.Load(getFileName());
+
+    if (!fileExists)
+    {
+        xmlDoc.SetDoc("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+        xmlDoc.AddElem("Root");
     }
 
-    return operations;
+    xmlDoc.FindElem();
+    xmlDoc.IntoElem();
+    xmlDoc.AddElem("Operation");
+    xmlDoc.IntoElem();
+    xmlDoc.AddElem("OperationId", operation.operationId);
+    xmlDoc.AddElem("UserId", operation.userId);
+    xmlDoc.AddElem("Date", operation.date);
+    xmlDoc.AddElem("Item", operation.item);
+    xmlDoc.AddElem("Amount", operation.amount);
+
+    return xmlDoc.Save(getFileName());
 }

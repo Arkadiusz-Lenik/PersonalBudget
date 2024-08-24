@@ -29,6 +29,7 @@ public:
     void loginUser();
     void logoutUser();
     bool isUserLoggedIn();
+    void addIncome();
     void showAllUsers();
 };
 

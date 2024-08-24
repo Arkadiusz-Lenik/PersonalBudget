@@ -46,7 +46,7 @@ int main()
             switch (choice)
             {
             case '1':
-                ;
+                budgetMainApp.addIncome();
                 break;
             case '2':
                 ;

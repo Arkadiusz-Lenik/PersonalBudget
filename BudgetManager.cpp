@@ -19,16 +19,30 @@ Operation BudgetManager::addOperationDetails(const Type &type)
 
     operation.userId = LOGGED_USER_ID;
 
-    cout << "Date of " << operationType << ": ";
+    //cout << "Date of " << operationType << ": ";
     operation.date = stoi(DateMethods::getCurrentDate());
 
     cout << "Enter type of " << operationType << ": ";
     operation.item = Utils::readLine();
 
-    cout << "Enter amount of : " << operationType << ": ";
+    cout << "Enter amount of " << operationType << ": ";
     operation.amount = Utils::getDecimalNumber();
 
     return operation;
+}
+
+void BudgetManager::addIncome()
+{
+    Operation operation;
+    operation = addOperationDetails(INCOME);
+    incomes.push_back(operation);
+
+    if (incomeFile.addOperationToFile(operation))
+    {
+        cout << "Your income has been added to file." << endl << endl;
+    }
+
+    system("pause");
 }
 
 
