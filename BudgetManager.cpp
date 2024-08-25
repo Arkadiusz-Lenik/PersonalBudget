@@ -3,7 +3,7 @@
 Operation BudgetManager::addOperationDetails(const Type &type)
 {
     Operation operation;
-    string operationType = "";
+    string operationType = "", dateAssociatedValue = "";
 
     switch(type)
     {
@@ -19,13 +19,19 @@ Operation BudgetManager::addOperationDetails(const Type &type)
 
     operation.userId = LOGGED_USER_ID;
 
-    //cout << "Date of " << operationType << ": ";
-    operation.date = stoi(DateMethods::getCurrentDate());
+    do
+    {
+        cout << "Enter date of " << operationType <<" in format YYYY-MM-DD. Press 't' to use today's date." << endl;
+        dateAssociatedValue = Utils::readLine();
+    }
+    while (!DateMethods::validateDate(dateAssociatedValue));
 
-    cout << "Enter type of " << operationType << ": ";
+    operation.date = (dateAssociatedValue.length() == 1) ? DateMethods::getTodaysDate() : DateMethods::covertStringDateToInt(dateAssociatedValue);
+
+    cout << "Enter name of " << operationType << ": " << endl;
     operation.item = Utils::readLine();
 
-    cout << "Enter amount of " << operationType << ": ";
+    cout << "Enter amount of " << operationType << ": " << endl;
     operation.amount = Utils::getDecimalNumber();
 
     return operation;

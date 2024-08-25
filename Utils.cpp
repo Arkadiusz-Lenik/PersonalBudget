@@ -24,6 +24,7 @@ char Utils::getCharacter()
 string Utils::readLine()
 {
     string input = "";
+    cin.sync();
     getline(cin, input);
     return input;
 }
