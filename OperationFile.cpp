@@ -62,6 +62,10 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
 
 bool OperationFile::addOperationToFile(const Operation &operation)
 {
+    stringstream ss;
+    ss << fixed << setprecision(2) << operation.amount;
+    string doubleValueConvertedToString = ss.str();
+
     bool fileExists = xmlDoc.Load(getFileName());
 
     if (!fileExists)
@@ -78,7 +82,7 @@ bool OperationFile::addOperationToFile(const Operation &operation)
     xmlDoc.AddElem("UserId", operation.userId);
     xmlDoc.AddElem("Date", operation.date);
     xmlDoc.AddElem("Item", operation.item);
-    xmlDoc.AddElem("Amount", operation.amount);
+    xmlDoc.AddElem("Amount", doubleValueConvertedToString);
 
     return xmlDoc.Save(getFileName());
 }

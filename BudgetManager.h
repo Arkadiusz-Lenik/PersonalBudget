@@ -8,6 +8,7 @@
 #include "Operation.h"
 #include "DateMethods.h"
 #include "Type.h"
+#include "CashMethods.h"
 
 using namespace std;
 

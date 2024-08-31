@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <iomanip>
 #include "File.h"
 #include "Operation.h"
 

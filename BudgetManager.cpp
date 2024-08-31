@@ -3,7 +3,7 @@
 Operation BudgetManager::addOperationDetails(const Type &type)
 {
     Operation operation;
-    string operationType = "", dateAssociatedValue = "";
+    string operationType = "", dateAssociatedValue = "", temporaryAmount = "";
 
     switch(type)
     {
@@ -21,18 +21,24 @@ Operation BudgetManager::addOperationDetails(const Type &type)
 
     do
     {
-        cout << "Enter date of " << operationType <<" in format YYYY-MM-DD. Press 't' to use today's date." << endl;
+        cout << "Enter date of " << operationType <<" in format YYYY-MM-DD. Press 't' to use today's date. ";
         dateAssociatedValue = Utils::readLine();
     }
     while (!DateMethods::validateDate(dateAssociatedValue));
 
     operation.date = (dateAssociatedValue.length() == 1) ? DateMethods::getTodaysDate() : DateMethods::covertStringDateToInt(dateAssociatedValue);
 
-    cout << "Enter name of " << operationType << ": " << endl;
+    cout << "Enter name of " << operationType << ": ";
     operation.item = Utils::readLine();
 
-    cout << "Enter amount of " << operationType << ": " << endl;
-    operation.amount = Utils::getDecimalNumber();
+    do
+    {
+        cout << "Enter amount of " << operationType << " with up to two decimal places: ";
+        temporaryAmount = Utils::readLine();
+    }
+    while (!CashMethods::validateAmount(temporaryAmount));
+
+    operation.amount = stod(CashMethods::changeCommaToDot(temporaryAmount));
 
     return operation;
 }
@@ -45,7 +51,7 @@ void BudgetManager::addIncome()
 
     if (incomeFile.addOperationToFile(operation))
     {
-        cout << "Your income has been added to file." << endl << endl;
+        cout << "Your income has been added to file." << endl;
     }
 
     system("pause");
@@ -59,7 +65,7 @@ void BudgetManager::addExpense()
 
     if (expenseFile.addOperationToFile(operation))
     {
-        cout << "Your expense has been added to file." << endl << endl;
+        cout << "Your expense has been added to file." << endl;
     }
 
     system("pause");
