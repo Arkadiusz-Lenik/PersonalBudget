@@ -9,6 +9,7 @@
 #include "DateMethods.h"
 #include "Type.h"
 #include "CashMethods.h"
+#include "Menus.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ class BudgetManager
     vector <Operation> expenses;
 
     Operation addOperationDetails(const Type &type);
+    void showBalance(int startDate, int endDate);
 
 public:
     BudgetManager(int loggedUserId, string incomeFileName, string expenseFileName) : LOGGED_USER_ID(loggedUserId), incomeFile(incomeFileName), expenseFile(expenseFileName)
@@ -32,6 +34,9 @@ public:
 
     void addIncome();
     void addExpense();
+    void showCurrentMonthBalance();
+    void showPreviousMonthBalance();
+    void showCustomPeriodBalance();
 
 };
 

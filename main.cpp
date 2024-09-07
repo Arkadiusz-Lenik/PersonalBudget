@@ -13,59 +13,60 @@ int main()
     while (true)
     {
         if (budgetMainApp.isUserLoggedIn() == false)
-            //if (true)
         {
+            Menus::showTitle("HOME MENU");
             Menus::showHomeMenu();
             choice = Utils::getCharacter();
 
             switch (choice)
             {
-            case '1':
-                budgetMainApp.registerUser();
-                break;
-            case '2':
-                budgetMainApp.loginUser();
-                break;
-            case '3':
-                budgetMainApp.showAllUsers();
-                break;
-            case '9':
-                exit(0);
-                break;
-            default:
-                cout << endl << "Character not used. Try again" << endl << endl;
-                system("pause");
-                break;
+                case '1':
+                    budgetMainApp.registerUser();
+                    break;
+                case '2':
+                    budgetMainApp.loginUser();
+                    break;
+                case '3':
+                    budgetMainApp.showAllUsers();
+                    break;
+                case '9':
+                    exit(0);
+                    break;
+                default:
+                    cout << endl << "Character not used. Try again" << endl << endl;
+                    system("pause");
+                    break;
             }
         }
         else
         {
+            Menus::showTitle("MAIN MENU");
             Menus::showMainMenu();
             choice = Utils::getCharacter();
 
             switch (choice)
             {
-            case '1':
-                budgetMainApp.addIncome();
-                break;
-            case '2':
-                budgetMainApp.addExpense();;
-                break;
-            case '3':
-                ;
-                break;
-            case '4':
-                ;
-                break;
-            case '5':
-                ;
-                break;
-            case '6':
-                ;
-                break;
-            case '7':
-                budgetMainApp.logoutUser();
-                break;
+                case '1':
+                    budgetMainApp.addIncome();
+                    break;
+                case '2':
+                    budgetMainApp.addExpense();
+                    break;
+                case '3':
+                    budgetMainApp.showCurrentMonthBalance();
+                    break;
+                case '4':
+                    budgetMainApp.showPreviousMonthBalance();
+                    break;
+                case '5':
+                    budgetMainApp.showCustomPeriodBalance();
+                    break;
+                case '6':
+                    ;
+                    break;
+                case '7':
+                    budgetMainApp.logoutUser();
+                    break;
             }
         }
     }

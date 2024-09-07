@@ -1,6 +1,6 @@
 #include "OperationFile.h"
 
-int OperationFile::getLastOperationId()
+int OperationFile::getLastOperationIdFromLoadedFile()
 {
     int lastOperationId = 0;
 
@@ -8,7 +8,7 @@ int OperationFile::getLastOperationId()
     xmlDoc.FindElem();
     xmlDoc.IntoElem();
 
-    while ( xmlDoc.FindElem("Operation") )
+    while (xmlDoc.FindElem("Operation"))
     {
         xmlDoc.IntoElem();
         xmlDoc.FindElem( "OperationId" );
@@ -85,4 +85,14 @@ bool OperationFile::addOperationToFile(const Operation &operation)
     xmlDoc.AddElem("Amount", doubleValueConvertedToString);
 
     return xmlDoc.Save(getFileName());
+}
+
+int OperationFile::getLastOperationId()
+{
+    return lastOperationId;
+}
+
+void OperationFile::setLastOperationId(int lastOperationId)
+{
+    this->lastOperationId = lastOperationId;
 }

@@ -41,7 +41,12 @@ bool DateMethods::validateDate(string dateAssociatedValue)
 
     for (size_t signPosition = 0; signPosition < dateAssociatedValue.length(); signPosition++)
     {
-        if (isdigit(dateAssociatedValue[signPosition]) || signPosition == 4 || signPosition == 7)
+        //if (isdigit(dateAssociatedValue[signPosition]) || signPosition == 4 || signPosition == 7)
+        if (isdigit(dateAssociatedValue[signPosition]))
+        {
+            continue;
+        }
+        else if ((dateAssociatedValue[signPosition] == '-') && (signPosition == 4 || signPosition == 7))
         {
             continue;
         }
@@ -142,7 +147,7 @@ int DateMethods::howManyDaysDoesEachMonthHave(map <string, int> enteredDate)
     return days;
 }
 
-int DateMethods::covertStringDateToInt(const string dateAsString)
+int DateMethods::convertStringDateToInt(const string dateAsString)
 {
     string tempStringDateWithoutDashes = "";
     int dateAsInt = 0;
@@ -163,6 +168,148 @@ int DateMethods::covertStringDateToInt(const string dateAsString)
 
     return dateAsInt;
 }
+
+int DateMethods::getCurrentMonthStartDate()
+{
+    time_t currentTime = time(NULL);
+    tm* currentTimePointer = localtime(&currentTime);
+
+    string currentMonthStartDateAsString = "", year = "", month = "", days = "01";
+    int currentMonthStartDateAsInt = 0;
+
+    year = to_string(currentTimePointer->tm_year + 1900);
+
+    if ((currentTimePointer->tm_mon + 1) < 10)
+    {
+        month = "0" + to_string(currentTimePointer->tm_mon + 1);
+    }
+    else
+    {
+        month = to_string(currentTimePointer->tm_mon + 1);
+    }
+
+    currentMonthStartDateAsString = year + month + days;
+    currentMonthStartDateAsInt = stoi(currentMonthStartDateAsString);
+
+    return currentMonthStartDateAsInt;
+}
+
+int DateMethods::getCurrentMonthEndDate()
+{
+    time_t currentTime = time(NULL);
+    tm* currentTimePointer = localtime(&currentTime);
+
+    map <string, int> date;
+    string currentMonthEndDateAsString = "", year = "", month = "", days = "";
+    int currentMonthEndDateAsInt = 0;
+
+    year = to_string(currentTimePointer->tm_year + 1900);
+
+    if ((currentTimePointer->tm_mon + 1) < 10)
+    {
+        month = "0" + to_string(currentTimePointer->tm_mon + 1);
+    }
+    else
+    {
+        month = to_string(currentTimePointer->tm_mon + 1);
+    }
+
+    date["year"] = stoi(year);
+    date["month"] = stoi(month);
+
+    days = to_string(howManyDaysDoesEachMonthHave(date));
+
+    currentMonthEndDateAsString = year + month + days;
+    currentMonthEndDateAsInt = stoi(currentMonthEndDateAsString);
+
+    return currentMonthEndDateAsInt;
+}
+
+int DateMethods::getPreviousMonthStartDate()
+{
+    time_t currentTime = time(NULL);
+    tm* currentTimePointer = localtime(&currentTime);
+
+    string previousMonthStartDateAsString = "", year = "", month = "", days = "01";
+    int previousMonthStartDateAsInt = 0;
+
+    if ((currentTimePointer->tm_mon + 1) == 1)
+    {
+        year = to_string(currentTimePointer->tm_year + 1900 - 1);
+        month = to_string(currentTimePointer->tm_mon + 11);
+    }
+    else
+    {
+        year = to_string(currentTimePointer->tm_year + 1900);
+
+        if ((currentTimePointer->tm_mon + 1) < 11)
+        {
+            month = "0" + to_string(currentTimePointer->tm_mon);
+        }
+        else
+        {
+            month = to_string(currentTimePointer->tm_mon);
+        }
+    }
+
+    previousMonthStartDateAsString = year + month + days;
+    previousMonthStartDateAsInt = stoi(previousMonthStartDateAsString);
+
+    return previousMonthStartDateAsInt;
+}
+
+int DateMethods::getPreviousMonthEndDate()
+{
+    time_t currentTime = time(NULL);
+    tm* currentTimePointer = localtime(&currentTime);
+
+    map <string, int> date;
+    string previousMonthEndDateAsString = "", year = "", month = "", days = "";
+    int previousMonthEndDateAsInt = 0;
+
+    if ((currentTimePointer->tm_mon + 1) == 1)
+    {
+        year = to_string(currentTimePointer->tm_year + 1900 - 1);
+        month = to_string(currentTimePointer->tm_mon + 11);
+    }
+    else
+    {
+        year = to_string(currentTimePointer->tm_year + 1900);
+
+        if ((currentTimePointer->tm_mon + 1) < 11)
+        {
+            month = "0" + to_string(currentTimePointer->tm_mon);
+        }
+        else
+        {
+            month = to_string(currentTimePointer->tm_mon);
+        }
+    }
+
+    date["year"] = stoi(year);
+    date["month"] = stoi(month);
+
+    days = to_string(howManyDaysDoesEachMonthHave(date));
+
+    previousMonthEndDateAsString = year + month + days;
+    previousMonthEndDateAsInt = stoi(previousMonthEndDateAsString);
+
+    return previousMonthEndDateAsInt;
+}
+
+string DateMethods::convertDateToStringWithDashes(int dateAsInt)
+{
+    string dateWithDashes = "", tempYear = "", tempMonth = "", tempDay = "", tempStringDate = to_string(dateAsInt);
+
+    tempYear = tempStringDate.substr(0,4);
+    tempMonth = tempStringDate.substr(4,2);
+    tempDay = tempStringDate.substr(6,2);
+
+    dateWithDashes = tempYear + "-" + tempMonth + "-" + tempDay;
+
+    return dateWithDashes;
+}
+
 
 
 

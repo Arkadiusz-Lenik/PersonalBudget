@@ -21,12 +21,12 @@ Operation BudgetManager::addOperationDetails(const Type &type)
 
     do
     {
-        cout << "Enter date of " << operationType <<" in format YYYY-MM-DD. Press 't' to use today's date. ";
+        cout << "Enter date of " << operationType <<" in format YYYY-MM-DD. Press 't' to use today's date: ";
         dateAssociatedValue = Utils::readLine();
     }
     while (!DateMethods::validateDate(dateAssociatedValue));
 
-    operation.date = (dateAssociatedValue.length() == 1) ? DateMethods::getTodaysDate() : DateMethods::covertStringDateToInt(dateAssociatedValue);
+    operation.date = (dateAssociatedValue.length() == 1) ? DateMethods::getTodaysDate() : DateMethods::convertStringDateToInt(dateAssociatedValue);
 
     cout << "Enter name of " << operationType << ": ";
     operation.item = Utils::readLine();
@@ -52,6 +52,7 @@ void BudgetManager::addIncome()
     if (incomeFile.addOperationToFile(operation))
     {
         cout << "Your income has been added to file." << endl;
+        incomeFile.setLastOperationId(incomeFile.getLastOperationId() + 1);
     }
 
     system("pause");
@@ -66,6 +67,81 @@ void BudgetManager::addExpense()
     if (expenseFile.addOperationToFile(operation))
     {
         cout << "Your expense has been added to file." << endl;
+    }
+
+    system("pause");
+}
+
+void BudgetManager::showCurrentMonthBalance()
+{
+    showBalance(DateMethods::getCurrentMonthStartDate(), DateMethods::getCurrentMonthEndDate());
+}
+
+void BudgetManager::showPreviousMonthBalance()
+{
+    showBalance(DateMethods::getPreviousMonthStartDate(), DateMethods::getPreviousMonthEndDate());
+}
+
+void BudgetManager::showCustomPeriodBalance()
+{
+    string tempUserStartDate = "", tempUserEndDate = "";
+    int userStartDate = 0, userEndDate = 0;
+
+    do
+    {
+        cout << "Enter starting date of balance in format YYYY-MM-DD. Press 't' to use today's date: ";
+        tempUserStartDate = Utils::readLine();
+    }
+    while (!DateMethods::validateDate(tempUserStartDate));
+
+    userStartDate = (tempUserStartDate.length() == 1) ? DateMethods::getTodaysDate() : DateMethods::convertStringDateToInt(tempUserStartDate);
+
+    do
+    {
+        cout << "Enter ending date of balance in format YYYY-MM-DD. Press 't' to use today's date: ";
+        tempUserEndDate = Utils::readLine();
+    }
+    while (!DateMethods::validateDate(tempUserEndDate));
+
+    userEndDate = (tempUserEndDate.length() == 1) ? DateMethods::getTodaysDate() : DateMethods::convertStringDateToInt(tempUserEndDate);
+
+    showBalance(userStartDate, userEndDate);
+}
+
+void BudgetManager::showBalance(int startDate, int endDate)
+{
+    Menus::showSubtitle("INCOMES");
+    int operationNumber = 1;
+
+    for (size_t i = 0; i < incomes.size(); i++)
+    {
+        if (incomes[i].date >= startDate && incomes[i].date <= endDate)
+        {
+            cout << operationNumber << ". Date: " << DateMethods::convertDateToStringWithDashes(incomes[i].date) << ", Name: " << incomes[i].item << ", Amount: " << incomes[i].amount << endl;
+            operationNumber++;
+        }
+    }
+
+    if (incomes.empty())
+    {
+        cout << "There are no data concerning incomes" << endl << endl;
+    }
+
+    Menus::showSubtitle("EXPENSES");
+    operationNumber = 1;
+
+    for (size_t i = 0; i < expenses.size(); i++)
+    {
+        if (expenses[i].date >= startDate && expenses[i].date <= endDate)
+        {
+            cout << i << ". Date: " << expenses[i].date << ", Name: " << expenses[i].item << ", Amount: " << expenses[i].amount << endl;
+            operationNumber++;
+        }
+    }
+
+    if (expenses.empty())
+    {
+        cout << "There are no data concerning expenses" << endl << endl;
     }
 
     system("pause");

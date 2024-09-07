@@ -42,6 +42,21 @@ void BudgetMainApp::addExpense()
     budgetManager->addExpense();
 }
 
+void BudgetMainApp::showCurrentMonthBalance()
+{
+    budgetManager->showCurrentMonthBalance();
+}
+
+void BudgetMainApp::showPreviousMonthBalance()
+{
+    budgetManager->showPreviousMonthBalance();
+}
+
+void BudgetMainApp::showCustomPeriodBalance()
+{
+    budgetManager->showCustomPeriodBalance();
+}
+
 
 
 
