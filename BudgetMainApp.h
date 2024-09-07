@@ -28,6 +28,7 @@ public:
     void registerUser();
     void loginUser();
     void logoutUser();
+    void changeUserPassword();
     bool isUserLoggedIn();
     void addIncome();
     void addExpense();

@@ -59,7 +59,7 @@ int main()
                     budgetMainApp.showCustomPeriodBalance();
                     break;
                 case '6':
-                    ;
+                    budgetMainApp.changeUserPassword();
                     break;
                 case '7':
                     budgetMainApp.logoutUser();

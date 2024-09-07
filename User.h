@@ -1,3 +1,5 @@
+#pragma once
+
 struct User
 {
     int userId = 0;

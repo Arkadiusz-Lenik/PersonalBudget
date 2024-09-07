@@ -25,6 +25,7 @@ public:
     }
     void registerUser();
     void loginUser();
+    void changeUserPassword();
     bool isUserLoggedIn();
     void setLoggedUserId(int loggedUserId);
     int getLoggedUserId();

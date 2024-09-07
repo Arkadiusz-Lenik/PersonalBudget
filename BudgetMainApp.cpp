@@ -15,6 +15,11 @@ void BudgetMainApp::loginUser()
     }
 }
 
+void BudgetMainApp::changeUserPassword()
+{
+    userManager.changeUserPassword();
+}
+
 bool BudgetMainApp::isUserLoggedIn()
 {
     return userManager.isUserLoggedIn();

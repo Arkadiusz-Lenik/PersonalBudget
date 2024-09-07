@@ -14,6 +14,7 @@ public:
     UserFile(string userFileName) : File(userFileName) {};
     bool addUserToFile(const User &user);
     vector <User> loadUsersFromFile();
+    bool changeUserPasswordInFile(int loggedUserId, string password);
 };
 
 #endif

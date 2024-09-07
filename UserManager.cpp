@@ -100,6 +100,29 @@ void UserManager::loginUser()
     }
 }
 
+void UserManager::changeUserPassword()
+{
+    string newPassword = "";
+    cout << "Enter new password: ";
+    newPassword = Utils::readLine();
+
+    for (size_t i = 0; i < users.size(); i++)
+    {
+        if (users[i].userId == loggedUserId)
+        {
+            users[i].password = newPassword;
+            cout << "Password has been changed." << endl << endl;
+            system("pause");
+        }
+    }
+
+    if (userFile.changeUserPasswordInFile(loggedUserId, newPassword))
+    {
+        cout << "Password has been changed in file." << endl << endl;
+        system("pause");
+    }
+}
+
 bool UserManager::isUserLoggedIn()
 {
     return (loggedUserId > 0) ? true : false;

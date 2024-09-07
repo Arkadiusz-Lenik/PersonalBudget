@@ -53,3 +53,34 @@ vector <User> UserFile::loadUsersFromFile()
     return users;
 }
 
+bool UserFile::changeUserPasswordInFile(int loggedUserId, string password)
+{
+    int userIdInFile = 0;
+    bool flag = false;
+
+    xmlDoc.Load("users.xml");
+    xmlDoc.FindElem();
+    xmlDoc.IntoElem();
+
+    while (xmlDoc.FindElem("User"))
+    {
+        xmlDoc.IntoElem();
+        xmlDoc.FindElem("UserId");
+        userIdInFile = stoi(xmlDoc.GetData());
+
+        if (userIdInFile == loggedUserId)
+        {
+            xmlDoc.FindElem("Password");
+            xmlDoc.SetData(password);
+            flag = true;
+            break;
+        }
+
+        xmlDoc.OutOfElem();
+    }
+
+    xmlDoc.Save("users.xml");
+
+    return flag;
+}
+
