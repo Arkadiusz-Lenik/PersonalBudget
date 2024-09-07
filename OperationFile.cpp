@@ -96,3 +96,5 @@ void OperationFile::setLastOperationId(int lastOperationId)
 {
     this->lastOperationId = lastOperationId;
 }
+
+

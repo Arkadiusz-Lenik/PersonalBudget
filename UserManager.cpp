@@ -58,16 +58,6 @@ int UserManager::getNewUserId()
         return users.back().userId + 1;
 }
 
-void UserManager::showAllUsers()
-{
-    for (size_t i = 0; i < users.size(); i++)
-    {
-        cout << users[i].userId << "|" << users[i].login << "|" << users[i].password << "|" << users[i].firstName << "|" << users[i].lastName << endl;
-    }
-
-    system("pause");
-}
-
 void UserManager::loginUser()
 {
     string login = "", password = "";

@@ -26,9 +26,6 @@ int main()
                 case '2':
                     budgetMainApp.loginUser();
                     break;
-                case '3':
-                    budgetMainApp.showAllUsers();
-                    break;
                 case '9':
                     exit(0);
                     break;

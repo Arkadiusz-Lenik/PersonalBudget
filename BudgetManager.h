@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "Utils.h"
 #include "OperationFile.h"
 #include "Operation.h"
@@ -23,6 +24,7 @@ class BudgetManager
     vector <Operation> expenses;
 
     Operation addOperationDetails(const Type &type);
+    static bool sortByDate(const Operation &a, const Operation &b);
     void showBalance(int startDate, int endDate);
 
 public:

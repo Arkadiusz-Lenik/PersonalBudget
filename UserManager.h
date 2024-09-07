@@ -27,7 +27,6 @@ public:
     void loginUser();
     bool isUserLoggedIn();
     void setLoggedUserId(int loggedUserId);
-    void showAllUsers();
     int getLoggedUserId();
 };
 

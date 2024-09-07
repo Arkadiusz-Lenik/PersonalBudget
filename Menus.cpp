@@ -15,7 +15,6 @@ void Menus::showHomeMenu()
 {
     cout << "1. Create account" << endl;
     cout << "2. Log in" << endl;
-    cout << "3. Show all users" << endl;
     cout << "9. Exit" << endl << endl;
 }
 

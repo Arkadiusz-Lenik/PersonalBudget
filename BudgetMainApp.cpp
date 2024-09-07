@@ -27,11 +27,6 @@ void BudgetMainApp::logoutUser()
     budgetManager = NULL;
 }
 
-void BudgetMainApp::showAllUsers()
-{
-    userManager.showAllUsers();
-}
-
 void BudgetMainApp::addIncome()
 {
     budgetManager->addIncome();

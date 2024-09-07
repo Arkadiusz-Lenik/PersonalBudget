@@ -108,21 +108,30 @@ void BudgetManager::showCustomPeriodBalance()
     showBalance(userStartDate, userEndDate);
 }
 
+bool BudgetManager::sortByDate(const Operation &a, const Operation &b)
+{
+    return a.date < b.date;
+}
+
 void BudgetManager::showBalance(int startDate, int endDate)
 {
     Menus::showSubtitle("INCOMES");
     int operationNumber = 1;
+    double incomesSum = 0, expensesSum = 0;
+
+    sort(incomes.begin(), incomes.end(), sortByDate);
 
     for (size_t i = 0; i < incomes.size(); i++)
     {
         if (incomes[i].date >= startDate && incomes[i].date <= endDate)
         {
             cout << operationNumber << ". Date: " << DateMethods::convertDateToStringWithDashes(incomes[i].date) << ", Name: " << incomes[i].item << ", Amount: " << incomes[i].amount << endl;
+            incomesSum += incomes[i].amount;
             operationNumber++;
         }
     }
 
-    if (incomes.empty())
+    if (incomesSum == 0)
     {
         cout << "There are no data concerning incomes" << endl << endl;
     }
@@ -130,22 +139,33 @@ void BudgetManager::showBalance(int startDate, int endDate)
     Menus::showSubtitle("EXPENSES");
     operationNumber = 1;
 
+    sort(expenses.begin(), expenses.end(), sortByDate);
+
     for (size_t i = 0; i < expenses.size(); i++)
     {
         if (expenses[i].date >= startDate && expenses[i].date <= endDate)
         {
-            cout << i << ". Date: " << expenses[i].date << ", Name: " << expenses[i].item << ", Amount: " << expenses[i].amount << endl;
+            cout << operationNumber << ". Date: " << DateMethods::convertDateToStringWithDashes(expenses[i].date) << ", Name: " << expenses[i].item << ", Amount: " << expenses[i].amount << endl;
+            expensesSum += expenses[i].amount;
             operationNumber++;
         }
     }
 
-    if (expenses.empty())
+    if (expensesSum == 0)
     {
-        cout << "There are no data concerning expenses" << endl << endl;
+        cout << "There are no data concerning expenses" << endl;
     }
+
+    Menus::showSubtitle("SUMMARY");
+    cout << "Incomes sum: " << fixed << setprecision(2) << incomesSum << endl;
+    cout << "Expenses sum: " << expensesSum << endl;
+    cout << "Overall balance: " <<  incomesSum - expensesSum << endl << endl;
 
     system("pause");
 }
+
+
+
 
 
 

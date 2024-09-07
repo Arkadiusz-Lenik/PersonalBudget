@@ -31,7 +31,6 @@ public:
     bool isUserLoggedIn();
     void addIncome();
     void addExpense();
-    void showAllUsers();
     void showCurrentMonthBalance();
     void showPreviousMonthBalance();
     void showCustomPeriodBalance();
