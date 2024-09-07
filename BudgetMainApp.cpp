@@ -8,6 +8,11 @@ void BudgetMainApp::registerUser()
 void BudgetMainApp::loginUser()
 {
     userManager.loginUser();
+
+    if (userManager.isUserLoggedIn())
+    {
+        budgetManager = new BudgetManager(userManager.getLoggedUserId(), INCOME_FILE_NAME, EXPENSE_FILE_NAME);
+    }
 }
 
 bool BudgetMainApp::isUserLoggedIn()
@@ -18,11 +23,33 @@ bool BudgetMainApp::isUserLoggedIn()
 void BudgetMainApp::logoutUser()
 {
     userManager.setLoggedUserId(0);
+    delete budgetManager;
+    budgetManager = NULL;
 }
 
-void BudgetMainApp::showAllUsers()
+void BudgetMainApp::addIncome()
 {
-    userManager.showAllUsers();
+    budgetManager->addIncome();
+}
+
+void BudgetMainApp::addExpense()
+{
+    budgetManager->addExpense();
+}
+
+void BudgetMainApp::showCurrentMonthBalance()
+{
+    budgetManager->showCurrentMonthBalance();
+}
+
+void BudgetMainApp::showPreviousMonthBalance()
+{
+    budgetManager->showPreviousMonthBalance();
+}
+
+void BudgetMainApp::showCustomPeriodBalance()
+{
+    budgetManager->showCustomPeriodBalance();
 }
 
 

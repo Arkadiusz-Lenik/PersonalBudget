@@ -2,21 +2,24 @@
 
 void Menus::showTitle(string menuTitle)
 {
-    cout << menuTitle << endl;
+    system("cls");
+    cout << endl << "\t \t >>> " << menuTitle << " <<<" << endl;
+}
+
+void Menus::showSubtitle(string menuTitle)
+{
+    cout << endl << "\t \t >>> " << menuTitle << " <<<" << endl;
 }
 
 void Menus::showHomeMenu()
 {
-    system("cls");
     cout << "1. Create account" << endl;
     cout << "2. Log in" << endl;
-    cout << "3. Show all users" << endl;
     cout << "9. Exit" << endl << endl;
 }
 
 void Menus::showMainMenu()
 {
-    system("cls");
     cout << "1. Add new income" << endl;
     cout << "2. Add new expense" << endl;
     cout << "3. Show balance of current month" << endl;

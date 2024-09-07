@@ -5,7 +5,6 @@
 #include <vector>
 #include "UserFile.h"
 #include "Utils.h"
-#include "Menus.h"
 
 using namespace std;
 
@@ -17,7 +16,6 @@ class UserManager
     UserFile userFile;
     User enterUserData();
     int getNewUserId();
-    string readLine();
 
 public:
     UserManager(string userFileName) : userFile(userFileName)
@@ -29,7 +27,7 @@ public:
     void loginUser();
     bool isUserLoggedIn();
     void setLoggedUserId(int loggedUserId);
-    void showAllUsers();
+    int getLoggedUserId();
 };
 
 #endif
