@@ -14,13 +14,13 @@ class OperationFile : public File
 {
     int lastOperationId;
 
+    int getLastOperationIdFromLoadedFile();
+
 public:
     OperationFile(string fileName) : File(fileName)
     {
        lastOperationId = getLastOperationIdFromLoadedFile();
     }
-
-    int getLastOperationIdFromLoadedFile();
     vector <Operation> loadOperationsFromFile(const int loggedUserId);
     bool addOperationToFile(const Operation &operation);
     int getLastOperationId();

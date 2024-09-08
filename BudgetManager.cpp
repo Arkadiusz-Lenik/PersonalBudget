@@ -67,6 +67,7 @@ void BudgetManager::addExpense()
     if (expenseFile.addOperationToFile(operation))
     {
         cout << "Your expense has been added to file." << endl;
+        expenseFile.setLastOperationId(expenseFile.getLastOperationId() + 1);
     }
 
     system("pause");

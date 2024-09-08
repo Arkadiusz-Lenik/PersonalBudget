@@ -33,15 +33,15 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
         while (xmlDoc.FindElem("Operation"))
         {
             xmlDoc.IntoElem();
-            xmlDoc.FindElem( "OperationId" );
+            xmlDoc.FindElem("OperationId");
             operation.operationId = stoi(xmlDoc.GetData());
-            xmlDoc.FindElem( "UserId" );
+            xmlDoc.FindElem("UserId");
             operation.userId = stoi(xmlDoc.GetData());
-            xmlDoc.FindElem( "Date" );
+            xmlDoc.FindElem("Date");
             operation.date = stoi(xmlDoc.GetData());
-            xmlDoc.FindElem( "Item" );
+            xmlDoc.FindElem("Item");
             operation.item = xmlDoc.GetData();
-            xmlDoc.FindElem( "Amount" );
+            xmlDoc.FindElem("Amount");
             operation.amount = stod(xmlDoc.GetData());
 
             if (operation.userId == loggedUserId)
@@ -51,13 +51,9 @@ vector <Operation> OperationFile::loadOperationsFromFile(const int loggedUserId)
 
             xmlDoc.OutOfElem();
         }
+    }
 
-        return operations;
-    }
-    else
-    {
-        return operations;
-    }
+    return operations;
 }
 
 bool OperationFile::addOperationToFile(const Operation &operation)

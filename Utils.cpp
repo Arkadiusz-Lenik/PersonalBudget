@@ -3,7 +3,7 @@
 char Utils::getCharacter()
 {
     string input = "";
-    char singleSign  = {0};
+    char singleCharacter  = {0};
 
     while (true)
     {
@@ -11,14 +11,14 @@ char Utils::getCharacter()
 
         if (input.length() == 1)
         {
-            singleSign = input[0];
+            singleCharacter = input[0];
             break;
         }
 
-        cout << "To nie jest pojedynczy znak. Wpisz ponownie." << endl;
+        cout << "It is not a single character. Try again." << endl;
     }
 
-    return singleSign;
+    return singleCharacter;
 }
 
 string Utils::readLine()
@@ -29,19 +29,3 @@ string Utils::readLine()
     return input;
 }
 
-double Utils::getDecimalNumber()
-{
-    string input = "";
-    double number = 0;
-
-    while (true)
-    {
-        getline(cin, input);
-        stringstream myStream(input);
-
-        if (myStream >> number)
-            break;
-        cout << "Entered character string is not a number. Try again." << endl;
-    }
-    return number;
-}

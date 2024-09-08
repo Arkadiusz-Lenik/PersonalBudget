@@ -35,18 +35,17 @@ bool DateMethods::validateDate(string dateAssociatedValue)
 
     if (dateAssociatedValue.length() != 10)
     {
-        cout << "Entered date is too short" << endl;
+        cout << "Entered date is too short/long" << endl;
         return false;
     }
 
-    for (size_t signPosition = 0; signPosition < dateAssociatedValue.length(); signPosition++)
+    for (size_t characterPosition = 0; characterPosition < dateAssociatedValue.length(); characterPosition++)
     {
-        //if (isdigit(dateAssociatedValue[signPosition]) || signPosition == 4 || signPosition == 7)
-        if (isdigit(dateAssociatedValue[signPosition]))
+        if (isdigit(dateAssociatedValue[characterPosition]))
         {
             continue;
         }
-        else if ((dateAssociatedValue[signPosition] == '-') && (signPosition == 4 || signPosition == 7))
+        else if ((dateAssociatedValue[characterPosition] == '-') && (characterPosition == 4 || characterPosition == 7))
         {
             continue;
         }
@@ -59,7 +58,6 @@ bool DateMethods::validateDate(string dateAssociatedValue)
 
     map <string, int> enteredDate;
     enteredDate = splitEnteredDate(dateAssociatedValue);
-    bool isDateCorrect = false;
 
     time_t currentTime = time(NULL);
     tm* currentTimePointer = localtime(&currentTime);
@@ -70,18 +68,18 @@ bool DateMethods::validateDate(string dateAssociatedValue)
         {
             if (enteredDate["day"] >= 1 && enteredDate["day"] <= howManyDaysDoesEachMonthHave(enteredDate))
             {
-                return isDateCorrect = true;
+                return true;
             }
             else
             {
                 cout << "Entered day is incorrect" << endl;
-                return isDateCorrect = false;
+                return false;
             }
         }
         else
         {
             cout << "Entered month is incorrect" << endl;
-            return isDateCorrect = false;
+            return false;
         }
     }
 
@@ -91,24 +89,24 @@ bool DateMethods::validateDate(string dateAssociatedValue)
         {
             if (enteredDate["day"] >= 1 && enteredDate["day"] <= howManyDaysDoesEachMonthHave(enteredDate))
             {
-                return isDateCorrect = true;
+                return true;
             }
             else
             {
                 cout << "Entered day is incorrect" << endl;
-                return isDateCorrect = false;
+                return false;
             }
         }
         else
         {
             cout << "Entered month is incorrect" << endl;
-            return isDateCorrect = false;
+            return false;
         }
     }
     else
     {
         cout << "Entered year is incorrect" << endl;
-        return isDateCorrect = false;
+        return false;
     }
 }
 
@@ -152,11 +150,11 @@ int DateMethods::convertStringDateToInt(const string dateAsString)
     string tempStringDateWithoutDashes = "";
     int dateAsInt = 0;
 
-    for (size_t signPosition = 0; signPosition < dateAsString.length(); signPosition++)
+    for (size_t characterPosition = 0; characterPosition < dateAsString.length(); characterPosition++)
     {
-        if (isdigit(dateAsString[signPosition]))
+        if (isdigit(dateAsString[characterPosition]))
         {
-            tempStringDateWithoutDashes += dateAsString[signPosition];
+            tempStringDateWithoutDashes += dateAsString[characterPosition];
         }
         else
         {

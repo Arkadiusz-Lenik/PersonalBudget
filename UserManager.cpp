@@ -92,7 +92,7 @@ void UserManager::loginUser()
         }
     }
 
-    if (userExists == false)
+    if (!userExists)
     {
         cout << "Entered user do not exist" << endl << endl;
         system("pause");

@@ -34,7 +34,7 @@ bool CashMethods::validateAmount(string temporaryAmount)
 
     indexOfLastCharacterInString = temporaryAmount.length() - 1;
 
-    if (indexOfLastCharacterInString - positionOfDecimalSeparator > 2)
+    if ((indexOfLastCharacterInString - positionOfDecimalSeparator > 2) && (positionOfDecimalSeparator != 0))
     {
         cout << "Entered value has more than two decimal places. Try again" << endl << endl;
         return false;

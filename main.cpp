@@ -12,7 +12,7 @@ int main()
 
     while (true)
     {
-        if (budgetMainApp.isUserLoggedIn() == false)
+        if (!budgetMainApp.isUserLoggedIn())
         {
             Menus::showTitle("HOME MENU");
             Menus::showHomeMenu();

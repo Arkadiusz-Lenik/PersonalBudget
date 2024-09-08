@@ -12,7 +12,6 @@ class Utils
 public:
     static char getCharacter();
     static string readLine();
-    static double getDecimalNumber();
 };
 
 #endif

@@ -2,7 +2,7 @@
 
 bool UserFile::addUserToFile(const User &user)
 {
-    bool fileExists = xmlDoc.Load("users.xml");
+    bool fileExists = xmlDoc.Load(getFileName());
 
     if (!fileExists)
     {
@@ -20,7 +20,7 @@ bool UserFile::addUserToFile(const User &user)
     xmlDoc.AddElem("FirstName", user.firstName);
     xmlDoc.AddElem("LastName", user.lastName);
 
-    return xmlDoc.Save("users.xml");
+    return xmlDoc.Save(getFileName());
 }
 
 vector <User> UserFile::loadUsersFromFile()
@@ -28,22 +28,22 @@ vector <User> UserFile::loadUsersFromFile()
     vector <User> users;
     User user;
 
-    xmlDoc.Load("users.xml");
+    xmlDoc.Load(getFileName());
     xmlDoc.FindElem();
     xmlDoc.IntoElem();
 
-    while ( xmlDoc.FindElem("User") )
+    while (xmlDoc.FindElem("User"))
     {
         xmlDoc.IntoElem();
-        xmlDoc.FindElem( "UserId" );
+        xmlDoc.FindElem("UserId");
         user.userId = stoi(xmlDoc.GetData());
-        xmlDoc.FindElem( "Login" );
+        xmlDoc.FindElem("Login");
         user.login = xmlDoc.GetData();
-        xmlDoc.FindElem( "Password" );
+        xmlDoc.FindElem("Password");
         user.password = xmlDoc.GetData();
-        xmlDoc.FindElem( "FirstName" );
+        xmlDoc.FindElem("FirstName");
         user.firstName = xmlDoc.GetData();
-        xmlDoc.FindElem( "LastName" );
+        xmlDoc.FindElem("LastName");
         user.lastName = xmlDoc.GetData();
 
         users.push_back(user);
@@ -58,7 +58,7 @@ bool UserFile::changeUserPasswordInFile(int loggedUserId, string password)
     int userIdInFile = 0;
     bool flag = false;
 
-    xmlDoc.Load("users.xml");
+    xmlDoc.Load(getFileName());
     xmlDoc.FindElem();
     xmlDoc.IntoElem();
 
@@ -79,7 +79,7 @@ bool UserFile::changeUserPasswordInFile(int loggedUserId, string password)
         xmlDoc.OutOfElem();
     }
 
-    xmlDoc.Save("users.xml");
+    xmlDoc.Save(getFileName());
 
     return flag;
 }
